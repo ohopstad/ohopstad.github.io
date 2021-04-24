@@ -31,12 +31,15 @@ nav{
     float: left;
     top: 0;
     /*size*/
+    padding-left: 10px;
     /*colors*/
     background-color: lightgrey;
+    border-style: solid;
 }
 .not_hidden{
     display: inline;
 }
 #content{
     margin-left: 10%;
+    top:1000px;
 }
