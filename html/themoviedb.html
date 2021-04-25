@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Hello, welcome</title>
+    </head>
+    <body>
+        <header>
+            <h1>Try api stuff with themoviedb.org</h1>
+        </header>
+        <div id="side_menu"></div> <!--TODO: add multiple different lists and search functions?-->
+        <script type="text/javascript">
+            function imdb_inline(){
+                const url = "https://api.themoviedb.org/3/"
+                let form = document.querySelector("#imdb");
+                let key = form.elements[0];
+                let id = form.elements[1];
+                fetch(url + "find/" + id 
+                    + "?api_key=" + key 
+                    + "&language=" + "en-US"
+                    + "&external_source=" + "imdb_id")
+                .then(function(data){
+                    console.log("TMDB_api => IMDB_id");
+                    console.log(data.json());
+                });
+            }
+        </script>
+        <form id="imdb" onSubmit=imdb_inline()>
+            <h2>IMDB id</h2>
+            <input type="text" name="api_key" placeholder="API_3">
+            <input type="text" name="imdb_id" value="tt1399045">
+            <input type="submit">
+        </form>
+    </body>
+</html>
+<!--I wonder if I exposed my key-->
