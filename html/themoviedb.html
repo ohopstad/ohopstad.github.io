@@ -39,11 +39,14 @@
                 console.log("..END of test..");
             }
         </script>
+        <label for="tmdb_key">TMDB API_key</label>
         <input id="tmdb_key" placeholder="TMDB key v3">
         <div id="api_problems" style="display:none"></div>
         <form id="ID_tests" onSubmit=test_ext_id_inline()>
             <h2>external ID</h2>
+            <label for="imdb_id">IMDB</label>
             <input type="text" name="imdb_id" value="tt1399045"><br>
+            <label for="tvdb_id">TVDB</label>
             <input type="text" name="tvdb_id" value="74205"><br>
             <input type="submit">
         </form>
