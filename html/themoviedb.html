@@ -20,16 +20,16 @@
                 }
                 let imdb = form.elements["imdb_id"];
                 let tvdb = form.elements["tvdb_id"];
-                fetch(url + "find/" + id 
-                    + "?api_key=" + imdb 
+                fetch(url + "find/" + imdb 
+                    + "?api_key=" + key 
                     + "&language=" + "en-US"
                     + "&external_source=" + "imdb_id")
                 .then(function(data){
                     console.log("TMDB_api => IMDB_id");
                     console.log(data.json());
                 });
-                fetch(url + "find/" + id 
-                    + "?api_key=" + tvdb 
+                fetch(url + "find/" + tvdb 
+                    + "?api_key=" + key 
                     + "&language=" + "en-US"
                     + "&external_source=" + "tvdb_id")
                 .then(function(data){
