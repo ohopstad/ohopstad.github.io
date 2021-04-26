@@ -10,25 +10,41 @@
         </header>
         <div id="side_menu"></div> <!--TODO: add multiple different lists and search functions?-->
         <script type="text/javascript">
-            function imdb_inline(){
+            function test_ext_id_inline(){
                 const url = "https://api.themoviedb.org/3/"
                 let form = document.querySelector("#imdb");
-                let key = form.elements[0];
-                let id = form.elements[1];
+                let key = document.querySelector("#tmdb_key").value;
+                if(key == ""){
+                    document.querySelector("#api_problems").innerHTML = "Remember to insert your API key from <a href='https://www.themoviedb.org/settings/api'>Your tmdb settings page</a>";
+                    return;
+                }
+                let imdb = form.elements["imdb_id"];
+                let tvdb = form.elements["tvdb_id"];
                 fetch(url + "find/" + id 
-                    + "?api_key=" + key 
+                    + "?api_key=" + imdb 
                     + "&language=" + "en-US"
                     + "&external_source=" + "imdb_id")
                 .then(function(data){
                     console.log("TMDB_api => IMDB_id");
                     console.log(data.json());
                 });
+                fetch(url + "find/" + id 
+                    + "?api_key=" + tvdb 
+                    + "&language=" + "en-US"
+                    + "&external_source=" + "tvdb_id")
+                .then(function(data){
+                    console.log("TMDB_api => TVDB_id");
+                    console.log(data.json());
+                });
+                console.log("..END of test..");
             }
         </script>
-        <form id="imdb" onSubmit=imdb_inline()>
-            <h2>IMDB id</h2>
-            <input type="text" name="api_key" placeholder="API_3">
+        <input id="tmdb_key" placeholder="TMDB key v3">
+        <div id="api_problems" style="display:none"></div>
+        <form id="ID_tests" onSubmit=test_ext_id_inline()>
+            <h2>external ID</h2>
             <input type="text" name="imdb_id" value="tt1399045">
+            <input type="text" name="tvdb_id" value="74205">
             <input type="submit">
         </form>
     </body>
