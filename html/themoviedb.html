@@ -2,6 +2,7 @@
     <head>
         <meta charset="UTF-8">
         <title>Hello, welcome</title>
+        <script src="../js/themoviedb.js"></script>
     </head>
     <body>
         <header>
@@ -10,78 +11,32 @@
         </header>
         <div id="side_menu"></div> <!--TODO: add multiple different lists and search functions?-->
         <script type="text/javascript">
-            async function test_inline_imdb(){
+            async function test_inline_user_auth(){
                 const URL = "https://api.themoviedb.org/3/find/"
-                let key = document.querySelector("#tmdb_v3").value;
+                let key3 = document.querySelector("#tmdb_v3").value;
                 let key4 = document.querySelector('#tmdb_v4').value;
-
-                let imdb = document.querySelector("#imdb_id").value;
-                let get = fetch(URL + imdb 
-                    + "?api_key=" + key 
-                    + "&language=" + "en-US"
-                    + "&external_source=" + "imdb_id");
-                let response = await get;
-                //console.log(response);
-                let jsonData = await response.json(); 
-                //console.log(jsonData);
-                let ret = {movies : [], TV : []};
-                for (movie in jsonData.movie_results){
-                    ret.movies.push(movie.title);
-                }
-                for (show of jsonData.tv_results){
-                    ret.TV.push(show.name);
-                }
-                //console.log(ret);
-                document.querySelector("#imdb_output").innerHTML = "movies: " + ret.movies.toString() + "<br>TV: " + ret.TV.toString();
                 
             }
-            async function test_inline_tvdb(){
-                // ----TVDB
-                const URL = "https://api.themoviedb.org/3/find/"
-                let key = document.querySelector("#tmdb_v3").value;
-                let key4 = document.querySelector('#tmdb_v4').value;
-
-                let tvdb = document.querySelector("#tvdb_id")
-                let get = fetch(URL + tvdb 
-                    + "?api_key=" + key 
-                    + "&language=" + "en-US"
-                    + "&external_source=" + "imdb_id");
-                let response = await get;
-                //console.log(response);
-                let jsonData = await response.json(); 
-                console.log(jsonData);
-                let ret = {movies : [], TV : []};
-                for (movie in jsonData.movie_results){
-                    ret.movies.push(movie.title);
-                }
-                for (show of jsonData.tv_results){
-                    ret.TV.push(show.name);
-                }
-                //console.log(ret);
-                document.querySelector("#tvdb_output").innerHTML = "movies: " + ret.movies.toString() + 
-                                                                    "<br>TV: " + ret.TV.toString();
-            }
+            
         </script>
-        <label for="tmdb_v3">TMDB API_key v3</label>
-        <input id="tmdb_v3" placeholder="v3"><br>
-        <label for"tmdb_v4">TMDB API-key v4</label>
-        <input id="tmdb_v4" placeholder="v4">
+        <label for="api_v3">TMDB API_key v3</label>
+        <input id="api_v3" placeholder="v3"><br>
+        <label for="api_v4">TMDB API-key v4</label>
+        <input id="api_v4" placeholder="v4">
         <div id="api_problems" style="display:none"></div>
 
         <!--actual tests-->
         <h2>external ID</h2>
-        <!--IMDB-->
-        <label for="imdb_id">IMDB</label>
-        <input type="text" id="imdb_id" value="tt1399045">
-        <button onclick=test_inline_imdb()>IMDB_test</button><br>
-        <label for="imdb_output">output IMDB</label>
-        <div id="imdb_output" style="border:solid"></div> <br>
-        <!--TVDB-->
-        <label for="tvdb_id">TVDB</label>
-        <input type="text" id="tvdb_id" value="74205">
-        <button onclick=test_inline_tvdb()>TVDB_test</button><br>
-        <label for="imdb_output">output TVDB</label>
-        <div id="tvdb_output" style="border:solid"></div> <br>
+        <label for="id">ID string</label>
+        <input type="text" id="id" value="tt1399045">
+        <select id="service">
+            <option value="imdb_id">IMDB</option>
+            <option value="tvdb_id">TVDB</option>
+        </select>
+        <button onclick=test_inline_external_id()>IMDB_test</button><br>
+        <label for="output">output</label>
+        <div id="output" style="border:solid"></div> <br>
+
     </body>
 </html>
 <!--I wonder if I exposed my key-->
