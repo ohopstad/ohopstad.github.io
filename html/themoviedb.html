@@ -15,7 +15,6 @@
                 const URL = "https://api.themoviedb.org/3/find/"
                 let key3 = document.querySelector("#tmdb_v3").value;
                 let key4 = document.querySelector('#tmdb_v4').value;
-                
             }
             
         </script>
@@ -26,17 +25,19 @@
         <div id="api_problems" style="display:none"></div>
 
         <!--actual tests-->
-        <h2>external ID</h2>
+        <h2>Search</h2>
         <label for="id">ID string</label>
         <input type="text" id="id" value="tt1399045">
         <select id="service">
+            <option value="movie_id">TMDB</option>
             <option value="imdb_id">IMDB</option>
             <option value="tvdb_id">TVDB</option>
+            <option value="facebook_id">Facebook</option>
+            <option value="twitter_id">Twitter</option>
+            <option value="instagram_id">Instagram</option>
         </select>
-        <button onclick=test_inline_external_id()>IMDB_test</button><br>
-        <label for="output">output</label>
-        <div id="output" style="border:solid"></div> <br>
-
+        <button onclick=test_id()>IMDB_test</button><br>
+        <div id="output" style=""></div>
     </body>
 </html>
 <!--I wonder if I exposed my key-->
