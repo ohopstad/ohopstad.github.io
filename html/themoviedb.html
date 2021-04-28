@@ -9,35 +9,42 @@
             <h1>WARNING: This is an experimental page for testing themoviedb.org API requests</h1>
             <p>Thread carefully.</p>
         </header>
-        <div id="side_menu"></div> <!--TODO: add multiple different lists and search functions?-->
         <script type="text/javascript">
-            async function test_inline_user_auth(){
-                const URL = "https://api.themoviedb.org/3/find/"
+            async function test_inline_search(){
+                const URL = "https://api.themoviedb.org/3/search"
                 let key3 = document.querySelector("#tmdb_v3").value;
-                let key4 = document.querySelector('#tmdb_v4').value;
+
             }
-            
         </script>
         <label for="api_v3">TMDB API_key v3</label>
         <input id="api_v3" placeholder="v3"><br>
         <label for="api_v4">TMDB API-key v4</label>
-        <input id="api_v4" placeholder="v4">
-        <div id="api_problems" style="display:none"></div>
+        <input id="api_v4" placeholder="v4"><br>
+        <div id="api_problems" style="display:none;"></div>
 
         <!--actual tests-->
         <h2>Search</h2>
-        <label for="id">ID string</label>
-        <input type="text" id="id" value="tt1399045">
+        <input type="text" id="id" placeholder="ID"><br>
         <select id="service">
-            <option value="movie_id">TMDB</option>
-            <option value="imdb_id">IMDB</option>
-            <option value="tvdb_id">TVDB</option>
-            <option value="facebook_id">Facebook</option>
-            <option value="twitter_id">Twitter</option>
-            <option value="instagram_id">Instagram</option>
-        </select>
-        <button onclick=test_id()>IMDB_test</button><br>
-        <div id="output" style=""></div>
+            <option value="tmdb">TMDB</option>
+            <option value="imdb">IMDB</option>
+            <option value="tvdb">TVDB</option>
+            <option value="facebook">Facebook</option>
+            <option value="twitter">Twitter</option>
+            <option value="instagram">Instagram</option>
+        </select><br>
+        <input type="text" id="query" placeholder="title" value="final"><br>
+        <select id="tv-or-movie">
+            <option value="tv">TV</option>
+            <option value="movie">Movies</option>
+        </select><br>
+        <input type="text" id="language" placeholder="language" value="en-US"><br>
+        <label for="include-adult">adult content</label>
+        <input type="checkbox" id="include-adult"><br>
+        <input type="number" id="year" placeholder="Year YYYY">
+        <button onclick=search()>Test_start</button><br>
+        <label for="output">Result</label><br>
+        <div id="output" style="display:inline; width:100%; height:300px; overflow: scroll;"></div>
+        
     </body>
 </html>
-<!--I wonder if I exposed my key-->

@@ -34,12 +34,17 @@ nav{
     padding-left: 10px;
     /*colors*/
     background-color: lightgrey;
-    border-style: solid;
 }
 .not_hidden{
-    display: inline;
+    display: block;
 }
 #content{
     margin-left: 10%;
     top:1000px;
+}
+#api_problems{
+    background-color: lightcoral; 
+    width: 300px; 
+    height: 100px; 
+    overflow: scroll;
 }
