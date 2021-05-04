@@ -1,31 +1,59 @@
+
+class Item{
+    constructor(title, poster_path, type){
+        this.poster_url = "https://image.tmdb.org/t/p/original" + poster_path;
+        this.title = title;
+        this.type = type;
+    }
+}
 async function search(){
-    const key3 = document.querySelector("#api_v3").value;
-    let id = document.querySelector("#id").value;
-    let language = document.querySelector("#language").value;
-    let type = document.querySelector("#tv-or-movie").value;
+    const key3 = document.getElementById("api_v3").value;
+    let id = document.getElementById("id").value;
+    let language = document.getElementById("language").value;
+    let type = document.getElementById("tv-or-movie").value;
     let json = "";
-    let query = document.querySelector("#query").value;
+    let query = document.getElementById("query").value;
 
     if(language == ""){
         language = "en-US";
     }
 
     if (id != ""){
-        let service = document.querySelector("#service").value;
+        let service = document.getElementById("service").value;
         if (service != "tmdb"){
             json = await search_id_external(key3, id, service, language); 
-            write_multiple_results(json);
+            json = await json.json();
+            ret = [];
+            for (res of json.tv_results){
+                ret.push(new Item(res.name, res.poster_path, "tv"));
+            }
+            for (res of json.movie_results){
+                ret.push(new Item(res.title, res.poster_path, "movie"));
+            }
+            write_results(ret);
             return;
         }
         json = await search_id(key3, id, type, language);
-        console.log(json);
-        write_single_result(json);
+        ret = [];
+        for (res in json.results.tv_shows.concat(json.results.movies)){
+            ret.push(new Item(res.title, res.poster_path, type));
+        }
+        write_results(json);
     }
     else{
         if(query != ""){
-            json = await search_tmdb(key3, type, query);
+            json = await search_tmdb(key3, type, query, language);
+            json = await json.json();
+            json = json.results;
+            
             console.log(json);
-            write_multiple_results(json);
+            ret = [];
+            for (res of json){
+                ret.push(new Item(res.name, res.poster_path, type));
+                
+            }
+            
+            write_results(ret);
         }
     }
 }
@@ -34,7 +62,7 @@ async function search(){
  * @param {*} error 
  */
 function print_issues(error){
-    let container = document.querySelector("#api_problems");
+    let container = document.getElementById("api_problems");
     container.innerHTML = error.toString();
     container.style.display = "block";
 } 
@@ -60,13 +88,12 @@ async function search_id(api_key, id, type, language){
     if (!data.ok){
         print_issues(data.statusText.toString());
     }
-    let jsonData = await data.json();
-    return jsonData;
+    return data;
 }
-async function search_tmdb(api_key, type, query){
+async function search_tmdb(api_key, type, query, language="en-US"){
     const URL = "https://api.themoviedb.org/3/search/"
     let fetch_url = URL + type + "/";
-    let url_get = "?api_key" + api_key
+    let url_get = "?api_key=" + api_key
                 + "&language=" + language
                 + "&query=" + query;
                 fetch_url += url_get;
@@ -79,8 +106,7 @@ async function search_tmdb(api_key, type, query){
     if (!data.ok){
         print_issues(data.statusText.toString());
     }
-    let jsonData = await data.json();
-    return jsonData;
+    return data;
 }
 /**
  * 
@@ -103,32 +129,14 @@ async function search_id_external(api_key, id, service, language){
     if (!data.ok){
         print_issues(data.statusText.toString());
     }  
-    let jsonData = await data.json(); 
-    return jsonData;
+    return data;
 }
-async function write_single_result(results_promise){
-    let container = document.querySelector("#output");
-    add_poster(results_promise.poster_path, container)
-}
-/**
- * 
- * @param {*} results_json 
- */
-async function write_multiple_results(results_promise){
-    const poster_url = "https://image.tmdb.org/t/p/original";
-    let results_json = await results_promise; 
-    let container = document.querySelector("#output");
-    output.innerHTML = "";
-
-    let results = results_json.movie_results.concat(results_json.tv_results);
-    for (ans of results){
-        add_poster(ans.poster_path, container);
+function write_results(arr){
+    here = document.getElementById("output");
+    console.log(arr[0])
+    for (result of arr){
+        here.innerHTML += "<div class='result_"+ result.type + "'><h3>"
+                        + result.title +"</h3><br><img class='result_img' src='" + result.poster_url 
+                        + "'></div>";
     }
-
 }
-function add_poster(path, container){
-    const poster_url = "https://image.tmdb.org/t/p/original";
-    container.innerHTML +=  "<img src='" + poster_url + path + "' width=100 height=150>";
-}
-
-document.getElementById("search").addEventListener("click", search);
