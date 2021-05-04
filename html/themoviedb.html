@@ -3,19 +3,13 @@
         <meta charset="UTF-8">
         <title>Hello, welcome</title>
         <script src="../js/themoviedb.js"></script>
+        <link rel="stylesheet" href="../css/tmdb.css">
     </head>
     <body>
         <header>
             <h1>WARNING: This is an experimental page for testing themoviedb.org API requests</h1>
             <p>Thread carefully.</p>
         </header>
-        <script type="text/javascript">
-            async function test_inline_search(){
-                const URL = "https://api.themoviedb.org/3/search"
-                let key3 = document.querySelector("#tmdb_v3").value;
-
-            }
-        </script>
         <label for="api_v3">TMDB API_key v3</label>
         <input id="api_v3" placeholder="v3"><br>
         <label for="api_v4">TMDB API-key v4</label>
@@ -42,9 +36,11 @@
         <label for="include-adult">adult content</label>
         <input type="checkbox" id="include-adult"><br>
         <input type="number" id="year" placeholder="Year YYYY">
-        <button id="search">Test_start</button><br>
+        <button id="go">Test_start</button><br>
         <label for="output">Result</label><br>
-        <div id="output" style="display:inline; width:100%; height:300px; overflow: scroll;"></div>
-        
+        <div id="output"></div>       
     </body>
+    <script language='javascript'>
+        document.getElementById('go').addEventListener('click', search);
+    </script>
 </html>
