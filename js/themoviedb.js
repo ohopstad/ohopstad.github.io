@@ -130,3 +130,5 @@ function add_poster(path, container){
     const poster_url = "https://image.tmdb.org/t/p/original";
     container.innerHTML +=  "<img src='" + poster_url + path + "' width=100 height=150>";
 }
+
+document.getElementById("search").addEventListener("click", search);
