@@ -31,9 +31,16 @@ function search(){
     else if(query != ""){
         fetch_tmdb(URL + "search/"+ type +"?api_key=" + key3 + "&query=" + query)
         .then((data)=>{
-            ret = []
+            ret = [];
             for (i of data.results){
-                ret.push(new Item(i.name, i.poster_path, type));
+                title = "";
+                if (type == "movie"){
+                    title = i.title;
+                }
+                else{
+                    title = i.name;
+                }
+                ret.push(new Item(title, i.poster_path, type));
             }
             write_results(ret);
         });
@@ -49,6 +56,7 @@ function print_issues(error){
 
 function write_results(arr){
     here = document.getElementById("output");
+    here.innerHTML = "";
     for (result of arr){
         here.innerHTML += "<div class='result_"+ result.type + "'><h3>"
                         + result.title +"</h3><br><img class='result_img' src='" + result.poster_url 
