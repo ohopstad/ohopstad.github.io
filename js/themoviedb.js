@@ -81,7 +81,6 @@ async function search_id(api_key, id, type, language){
     fetch_url += url_get;
     let fetch_req = fetch(fetch_url)
         .catch((error)=>{
-            console.error(error);
             print_issues(error);
         });
     let data = await fetch_req;
@@ -99,7 +98,6 @@ async function search_tmdb(api_key, type, query, language="en-US"){
                 fetch_url += url_get;
     let fetch_req = fetch(fetch_url)
         .catch((error)=>{
-            console.err(error);
             print_issues(error);
         });
     let data = await fetch_req;
