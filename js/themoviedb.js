@@ -6,8 +6,9 @@ class Item{
         this.type = type;
     }
 }
-async function search(){
+function search(){
     const key3 = document.getElementById("api_v3").value;
+    const URL = "https://api.themoviedb.org/3/"
     let id = document.getElementById("id").value;
     let language = document.getElementById("language").value;
     let type = document.getElementById("tv-or-movie").value;
@@ -19,122 +20,51 @@ async function search(){
     }
 
     if (id != ""){
-        let service = document.getElementById("service").value;
-        if (service != "tmdb"){
-            json = await search_id_external(key3, id, service, language); 
-            json = await json.json();
-            ret = [];
-            for (res of json.tv_results){
-                ret.push(new Item(res.name, res.poster_path, "tv"));
-            }
-            for (res of json.movie_results){
-                ret.push(new Item(res.title, res.poster_path, "movie"));
-            }
-            write_results(ret);
-            return;
-        }
-        json = await search_id(key3, id, type, language);
-        ret = [];
-        for (res in json.results.tv_shows.concat(json.results.movies)){
-            ret.push(new Item(res.title, res.poster_path, type));
-        }
-        write_results(json);
+        console.log(id);
+        hello = fetch_tmdb(URL + type + "/" + id + "?api_key=" + key3)
+        .then((data)=>{
+            console.log(data);
+            write_results([new Item(data.name, data.poster_path, type)]);
+        });
+        console.log(hello);
     }
-    else{
-        if(query != ""){
-            json = await search_tmdb(key3, type, query, language);
-            json = await json.json();
-            json = json.results;
-            
-            console.log(json);
-            ret = [];
-            for (res of json){
-                ret.push(new Item(res.name, res.poster_path, type));
-                
+    else if(query != ""){
+        fetch_tmdb(URL + "search/"+ type +"?api_key=" + key3 + "&query=" + query)
+        .then((data)=>{
+            ret = []
+            for (i of data.results){
+                ret.push(new Item(i.name, i.poster_path, type));
             }
-            
             write_results(ret);
-        }
+        });
+
     }
 }
-/**
- * 
- * @param {*} error 
- */
+
 function print_issues(error){
     let container = document.getElementById("api_problems");
     container.innerHTML = error.toString();
     container.style.display = "block";
 } 
 
-/**
- * 
- * @param {*} api_key 
- * @param {*} id 
- * @param {*} language 
- */
-async function search_id(api_key, id, type, language){
-    const URL = "https://api.themoviedb.org/3/"
-    let fetch_url = URL + type + "/" + id;
-    let url_get = "?api_key=" + api_key
-                + "&language=" + language;
-    fetch_url += url_get;
-    let fetch_req = fetch(fetch_url)
-        .catch((error)=>{
-            print_issues(error);
-        });
-    let data = await fetch_req;
-    if (!data.ok){
-        print_issues(data.statusText.toString());
-    }
-    return data;
-}
-async function search_tmdb(api_key, type, query, language="en-US"){
-    const URL = "https://api.themoviedb.org/3/search/"
-    let fetch_url = URL + type + "/";
-    let url_get = "?api_key=" + api_key
-                + "&language=" + language
-                + "&query=" + query;
-                fetch_url += url_get;
-    let fetch_req = fetch(fetch_url)
-        .catch((error)=>{
-            print_issues(error);
-        });
-    let data = await fetch_req;
-    if (!data.ok){
-        print_issues(data.statusText.toString());
-    }
-    return data;
-}
-/**
- * 
- * @returns 
- */
-async function search_id_external(api_key, id, service, language){
-    const URL = "https://api.themoviedb.org/3/";
-    
-    let fetch_url = URL;
-    let url_get = "?api_key=" + api_key //api-key
-                + "&language=" + language
-                + "&external_source=" + service + "_id";
-
-    fetch_url += "find/" + id + url_get;
-    let fetch_req = fetch(fetch_url)
-        .catch((error)=>{
-            print_issues(error);
-        });
-    let data = await fetch_req;  
-    if (!data.ok){
-        print_issues(data.statusText.toString());
-    }  
-    return data;
-}
 function write_results(arr){
     here = document.getElementById("output");
-    console.log(arr[0])
     for (result of arr){
         here.innerHTML += "<div class='result_"+ result.type + "'><h3>"
                         + result.title +"</h3><br><img class='result_img' src='" + result.poster_url 
                         + "'></div>";
     }
 }
+async function fetch_tmdb(url){
+    let response = await fetch(url, {
+        redirect: "error"
+    })
+    .then(data=>{
+        meh = data.json();
+        return meh;
+    })
+    .catch(error=>{
+        console.log(error);
+    });
+    return response;
+} 
