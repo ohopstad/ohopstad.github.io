@@ -3,11 +3,13 @@ Boxes for ~pizazz~
 */
 #enter_api{
     margin:auto;
-    width: 40%;
+    width: 30%;
     display:block;
 }
 #controls{
     display:none;
+    width: 30%;
+    margin:auto;
 }
 
 /*
