@@ -88,10 +88,13 @@ async function fetch_tmdb(url){
 
 // from https://javascript.info/cookie 
 function getCookie(name) {
-    return document.cookie
-        .split('; ')
-        .find((row)=>row.startsWith(name + '='))
-        .split('=')[1];
+    if (document.cookie.includes(name)){
+        return document.cookie
+            .split('; ')
+            .find((row)=>row.startsWith(name + '='))
+            .split('=')[1];
+    }
+    return "";
 }
 
 // from https://javascript.info/cookie 
