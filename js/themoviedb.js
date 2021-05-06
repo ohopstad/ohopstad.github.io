@@ -11,10 +11,10 @@ class Item{
     }
 }
 function submit_api(){
-    let api_3 = document.getElementById("api_v3");
+    let api_3 = document.getElementById("api_v3").value;
+    let api_4 = document.getElementById("api_v4").value;
 
-    setCookie("tmdb_v3", tmdb_key);
-    document.getElementById("api_v3").value = "";
+    setCookie("tmdb_v3", api_3);
     document.getElementById("enter_api").style.display = "none";
     document.getElementById("controls").style.display = "block";
 }
