@@ -10,29 +10,37 @@
             <h1>WARNING: This is an experimental page for testing themoviedb.org API requests</h1>
             <p>Thread carefully.</p>
         </header>
-        <label for="api_v3">TMDB API_key v3</label>
-        <input id="api_v3" placeholder="v3"><br>
-        <label for="api_v4">TMDB API-key v4</label>
-        <input id="api_v4" placeholder="v4"><br>
-        <div id="api_problems" style="display:none;"></div>
-
-        <!--actual tests-->
-        <h2>Search</h2>
-        <input type="text" id="id" placeholder="ID"><br>
-        <input type="text" id="query" placeholder="title" value="final"><br>
-        <select id="tv-or-movie">
-            <option value="tv">TV</option>
-            <option value="movie">Movies</option>
-        </select><br>
-        <input type="text" id="language" placeholder="language" value="en-US"><br>
-        <label for="include-adult">adult content</label>
-        <input type="checkbox" id="include-adult"><br>
-        <input type="number" id="year" placeholder="Year YYYY">
-        <button id="go">Test_start</button><br>
+        <div id="enter_api">
+            <label for="api_v3">TMDB API_key v3</label>
+            <input id="api_v3" placeholder="v3"><br>
+            <label for="api_v4">TMDB API-key v4</label>
+            <input id="api_v4" placeholder="v4"><br>
+            <button id="submit_api">submit API key</button>
+        </div>
+        <div id="controls">
+            <h2>Search</h2>
+            <input type="text" id="id" placeholder="ID"><br>
+            <input type="text" id="query" placeholder="title" value="final"><br>
+            <select id="tv-or-movie">
+                <option value="tv">TV</option>
+                <option value="movie">Movies</option>
+            </select><br>
+            <input type="text" id="language" placeholder="language" value="en-US"><br>
+            <label for="include-adult">adult content</label>
+            <input type="checkbox" id="include-adult"><br>
+            <input type="number" id="year" placeholder="Year YYYY">
+            <button id="go">Test_start</button><br>
+        </div>  
+        <div id="api_problems"></div>
         <label for="output">Result</label><br>
-        <div id="output"></div>       
+        <div id="output"></div>
     </body>
     <script language='javascript'>
         document.getElementById('go').addEventListener('click', search);
+        document.getElementById('submit_api').addEventListener('click', submit_api);
+        if(getCookie('tmdb_v3')){
+            document.getElementById('enter_api').style.display = "none";
+            document.getElementById('controls').style.display = "block";
+        }
     </script>
 </html>

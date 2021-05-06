@@ -1,4 +1,8 @@
-
+/**
+ * title: TMDB api project
+ * author: Olav (https://github.com/ohopstad)
+ * date: May 2021
+ */
 class Item{
     constructor(title, poster_path, type){
         this.poster_url = "https://image.tmdb.org/t/p/original" + poster_path;
@@ -6,22 +10,27 @@ class Item{
         this.type = type;
     }
 }
+function submit_api(){
+    let api_3 = document.getElementById("api_v3");
+
+    setCookie("tmdb_v3", tmdb_key);
+    document.getElementById("api_v3").value = "";
+    document.getElementById("enter_api").style.display = "none";
+    document.getElementById("controls").style.display = "block";
+}
 function search(){
-    const key3 = document.getElementById("api_v3").value;
     const URL = "https://api.themoviedb.org/3/"
+    const tmdb_key = getCookie('tmdb_v3');
     let id = document.getElementById("id").value;
     let language = document.getElementById("language").value;
     let type = document.getElementById("tv-or-movie").value;
-    let json = "";
     let query = document.getElementById("query").value;
 
-    if(language == ""){
-        language = "en-US";
-    }
+    
 
     if (id != ""){
         console.log(id);
-        hello = fetch_tmdb(URL + type + "/" + id + "?api_key=" + key3)
+        hello = fetch_tmdb(URL + type + "/" + id + "?api_key=" + tmdb_key)
         .then((data)=>{
             console.log(data);
             write_results([new Item(data.name, data.poster_path, type)]);
@@ -29,7 +38,7 @@ function search(){
         console.log(hello);
     }
     else if(query != ""){
-        fetch_tmdb(URL + "search/"+ type +"?api_key=" + key3 + "&query=" + query)
+        fetch_tmdb(URL + "search/"+ type +"?api_key=" + tmdb_key + "&query=" + query)
         .then((data)=>{
             ret = [];
             for (i of data.results){
@@ -76,3 +85,31 @@ async function fetch_tmdb(url){
     });
     return response;
 } 
+
+// from https://javascript.info/cookie 
+function getCookie(name) {
+    return document.cookie
+        .split('; ')
+        .find((row)=>row.startsWith(name + '='))
+        .split('=')[1];
+}
+
+// from https://javascript.info/cookie 
+function setCookie(name, value, options={}) {
+
+    options = {
+        samesite: 'strict', 
+        'max-age': 3600
+    };
+
+    let updatedCookie = encodeURIComponent(name) + "=" + encodeURIComponent(value);
+
+    for (let optionKey in options) {
+        updatedCookie += "; " + optionKey;
+        let optionValue = options[optionKey];
+        if (optionValue !== true) {
+        updatedCookie += "=" + optionValue;
+        }
+    }
+    document.cookie = updatedCookie;
+}
