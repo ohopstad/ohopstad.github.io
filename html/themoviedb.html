@@ -7,35 +7,41 @@
     </head>
     <body>
         <header>
+            /TMDB api testing...
+        </header>
+        <div id=warning>
             <h1>WARNING: This is an experimental page for testing themoviedb.org API requests</h1>
             <p>Thread carefully.</p>
-        </header>
-        <div id="enter_api">
-            <label for="api_v3">TMDB API_key v3</label>
-            <input id="api_v3" placeholder="v3"><br>
-            <label for="api_v4">TMDB API-key v4</label>
-            <input id="api_v4" placeholder="v4"><br>
-            <button id="submit_api">submit API key</button>
         </div>
-        <div id="controls">
-            <h2>Search</h2>
-            <input type="text" id="id" placeholder="ID"><br>
-            <input type="text" id="query" placeholder="title" value="final"><br>
-            <select id="tv-or-movie">
-                <option value="tv">TV</option>
-                <option value="movie">Movies</option>
-            </select><br>
-            <input type="text" id="language" placeholder="language" value="en-US"><br>
-            <label for="include-adult">adult content</label>
-            <input type="checkbox" id="include-adult"><br>
-            <input type="number" id="year" placeholder="Year YYYY">
-            <button id="go">Test_start</button><br>
-        </div>
-        <div id="results_container">
-            <div id="api_problems"></div>
-            <label for="results">Result</label><br>
-            <div id="results"></div>    
-        </div>
+        <article>
+            <div id="enter_api">
+                <label for="api_v3">TMDB API_key v3</label>
+                <input id="api_v3" placeholder="v3"><br>
+                <label for="api_v4">TMDB API-key v4</label>
+                <input id="api_v4" placeholder="v4"><br>
+                <button id="submit_api">submit API key</button>
+            </div>
+            <div id="controls">
+                <h2>Search</h2>
+                <input type="text" id="id" placeholder="ID"><br>
+                <input type="text" id="query" placeholder="title" value="final"><br>
+                <select id="tv-or-movie">
+                    <option value="tv">TV</option>
+                    <option value="movie">Movies</option>
+                </select><br>
+                <input type="text" id="language" placeholder="language" value="en-US"><br>
+                <label for="include-adult">adult content</label>
+                <input type="checkbox" id="include-adult"><br>
+                <input type="number" id="year" placeholder="Year YYYY">
+                <button id="go">Test_start</button><br>
+            </div>
+            <div id="results_container">
+                <div id="api_problems"></div>
+                <button id="results_button">show/hide</button>
+                <label for="results">Result:</label><br>
+                <div id="results"></div>    
+            </div>
+        </article>
     </body>
     <script language='javascript'>
         document.getElementById('go').addEventListener('click', search);
@@ -44,5 +50,6 @@
             document.getElementById('enter_api').style.display = "none";
             document.getElementById('controls').style.display = "block";
         }
+        document.getElementById("results_button").addEventListener('click', toggle_results)
     </script>
 </html>

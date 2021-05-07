@@ -65,6 +65,7 @@ function print_issues(error){
 
 function write_results(arr){
     here = document.getElementById("results");
+    here.style.display = "block";
     here.innerHTML = "";
     for (result of arr){
         here.innerHTML += "<div class='result_"+ result.type + "'>"
@@ -115,4 +116,16 @@ function setCookie(name, value, options={}) {
         }
     }
     document.cookie = updatedCookie;
+}
+function toggle_results(){
+    api_problems = document.getElementById("api_problems");
+    results = document.getElementById("results");
+
+    api_problems.style.display = "none";
+    if (results.style.display != "none"){
+        results.style.display = "none";
+    }
+    else{
+        results.style.display = "block";
+    }
 }
