@@ -30,10 +30,12 @@
             <input type="checkbox" id="include-adult"><br>
             <input type="number" id="year" placeholder="Year YYYY">
             <button id="go">Test_start</button><br>
-        </div>  
-        <div id="api_problems"></div>
-        <label for="output">Result</label><br>
-        <div id="output"></div>
+        </div>
+        <div id="results_container">
+            <div id="api_problems"></div>
+            <label for="results">Result</label><br>
+            <div id="results"></div>    
+        </div>
     </body>
     <script language='javascript'>
         document.getElementById('go').addEventListener('click', search);

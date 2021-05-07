@@ -64,12 +64,12 @@ function print_issues(error){
 } 
 
 function write_results(arr){
-    here = document.getElementById("output");
+    here = document.getElementById("results");
     here.innerHTML = "";
     for (result of arr){
-        here.innerHTML += "<div class='result_"+ result.type + "'><h3>"
-                        + result.title +"</h3><br><img class='result_img' src='" + result.poster_url 
-                        + "'></div>";
+        here.innerHTML += "<div class='result_"+ result.type + "'>"
+                        +"<img class='result_img' src='" + result.poster_url 
+                        + "'><br><h3>" + result.title +"</h3></div>";
     }
 }
 async function fetch_tmdb(url){

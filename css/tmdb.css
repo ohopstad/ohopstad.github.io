@@ -15,17 +15,24 @@ Boxes for ~pizazz~
 /*
 Output / results
 */
+#results_container{
+    bottom: 0;
+    width: 100%;
+    height: 280px;
+    position:absolute;
+    background-color: white;
+}
 #api_problems{
     background-color: lightcoral; 
     border-style: dotted;
-    width: 300px; 
-    height: 100px; 
-    overflow: scroll;
+    width: 100%; 
+    height: 260px; 
+    overflow-y: scroll;
     display:none;
 }
-#output{
+#results{
     width: 100%;
-    height: 300px;
+    height: 260px;
     float: left;
     overflow-x: scroll;
     white-space: nowrap;
@@ -35,7 +42,7 @@ Output / results
 styling for results
 */
 .result_movie{
-    border:1px solid black;
+    border:1px solid grey;
     display: inline-block;
     white-space: normal;
     width: 150px;
@@ -43,21 +50,26 @@ styling for results
     text-align: center;
     background-color: lightpink;
     overflow: hidden;
+    border-radius: 10px;
+    margin-right: 10px;
 }
 .result_tv{
-    border:1px solid black;
+    border:1px solid grey;
     display: inline-block;
     white-space: normal;
     width: 150px;
     height: 250px;
     text-align: center;
-    background-color: lightgreen;
+    background-color: lightcyan;
     overflow: hidden;
+    border-radius: 10px;
+    margin-right: 10px;
 }
 .result_img{
     display: block;
     margin-left: auto;
     margin-right: auto;
+    margin-top: 10px;
     width: 100px;
     height: 150px;
 }
