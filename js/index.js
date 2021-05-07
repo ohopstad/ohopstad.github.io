@@ -1,4 +1,9 @@
 function toggle_menu(){
-    menubar = document.querySelector("#menu");
-    menubar.classList.toggle("not_hidden");
+    menubar = document.getElementById("menu");
+    if (menubar.style.display == "block"){
+        menubar.style.display = "none";
+    }
+    else{
+        menubar.style.display = "block";
+    }
 }
