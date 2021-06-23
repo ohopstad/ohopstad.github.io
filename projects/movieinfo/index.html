@@ -46,9 +46,6 @@
         document.getElementById('submit_api').addEventListener('click', submit_api);
         document.getElementById('api_v3').value = getCookie("api_v3");
         document.getElementById('api_v4').value = getCookie("api_v4");
-        if(getCookie("api_v3") || getCookie("api_v4")){
-            toggle_api();
-        }
         document.getElementById("results_button").addEventListener('click', toggle_results)
         document.getElementById("api_button").addEventListener('click', toggle_api)
     </script>
