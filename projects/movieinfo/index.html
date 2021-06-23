@@ -7,13 +7,10 @@
     </head>
     <body>
         <header>
-            /TMDB api testing...
+            !! WARNING: This is an experimental page for testing themoviedb.org API requests !!
         </header>
-        <div id=warning>
-            <h1>WARNING: This is an experimental page for testing themoviedb.org API requests</h1>
-            <p>Thread carefully.</p>
-        </div>
         <article>
+            <button id="api_button">show/hide API_key</button>
             <div id="enter_api">
                 <label for="api_v3">TMDB API_key v3</label>
                 <input id="api_v3" placeholder="v3"><br>
@@ -26,6 +23,7 @@
                 <input type="text" id="id" placeholder="ID"><br>
                 <input type="text" id="query" placeholder="title" value="final"><br>
                 <select id="tv-or-movie">
+                    <option value="any">TV/Movie</option>
                     <option value="tv">TV</option>
                     <option value="movie">Movies</option>
                 </select><br>
@@ -46,10 +44,12 @@
     <script language='javascript'>
         document.getElementById('go').addEventListener('click', search);
         document.getElementById('submit_api').addEventListener('click', submit_api);
-        if(getCookie('tmdb_v3')){
-            document.getElementById('enter_api').style.display = "none";
-            document.getElementById('controls').style.display = "block";
+        document.getElementById('api_v3').value = getCookie("api_v3");
+        document.getElementById('api_v4').value = getCookie("api_v4");
+        if(getCookie("api_v3") || getCookie("api_v4")){
+            toggle_api();
         }
         document.getElementById("results_button").addEventListener('click', toggle_results)
+        document.getElementById("api_button").addEventListener('click', toggle_api)
     </script>
 </html>

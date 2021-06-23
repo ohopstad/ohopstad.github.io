@@ -15,24 +15,18 @@ header{
     height: 30px;
     padding-top: 10px;
     /* colors*/
-    background-color: grey;
+    background-color: lightcoral;
 }
 article{
+    padding-top: 50px;
     overflow-x: scroll;
-}
-#warning{
-    width: 600px;
-    top:0;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top:50px;
-    border: dashed 2px black ;
-    border-radius: 10px;
-    background-color: salmon;
 }
 /*
 Boxes for ~pizazz~
 */
+#api_button{
+    margin-left: 0;
+}
 #enter_api{
     margin:auto;
     width: 30%;
@@ -73,6 +67,19 @@ Output / results
 /*
 styling for results
 */
+.result{
+    border:1px solid grey;
+    display: inline-block;
+    white-space: normal;
+    width: 150px;
+    height: 250px;
+    text-align: center;
+    background-color: #FFFFFF00;
+    overflow: hidden;
+    border-radius: 10px;
+    margin-right: 10px;
+    color: grey;
+}
 .result_movie{
     border:1px solid grey;
     display: inline-block;
