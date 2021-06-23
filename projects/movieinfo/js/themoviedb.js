@@ -15,12 +15,13 @@ function submit_api(){
     let api_4 = document.getElementById("api_v4").value;
 
     setCookie("tmdb_v3", api_3);
+    setCookie("tmdb_v4", api_4);
     document.getElementById("enter_api").style.display = "none";
     document.getElementById("controls").style.display = "block";
 }
 function search(){
-    const URL = "https://api.themoviedb.org/3/"
-    const tmdb_key = getCookie('tmdb_v3');
+    const URL = "https://api.themoviedb.org/4/"
+    const tmdb_key = getCookie('tmdb_v4');
     let id = document.getElementById("id").value;
     let language = document.getElementById("language").value;
     let type = document.getElementById("tv-or-movie").value;
@@ -95,6 +96,7 @@ function getCookie(name) {
             .find((row)=>row.startsWith(name + '='))
             .split('=')[1];
     }
+    console.error("getCookie(): Cookie '" + name + "' not found!");
     return "";
 }
 
