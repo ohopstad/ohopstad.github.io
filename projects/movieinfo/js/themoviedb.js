@@ -60,7 +60,7 @@ function submit_api(){
 }
 function search(){
     const URL = "https://api.themoviedb.org/3/"
-    const tmdb_key = getCookie('tmdb_v3');
+    const tmdb_key = "1422303e78dc4243889e6e549813ff6d";
     let language = document.getElementById("language").value;
     let type = document.getElementById("tv-or-movie").value;
     let query = document.getElementById("query").value;
