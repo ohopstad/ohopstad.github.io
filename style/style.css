@@ -1,0 +1,19 @@
+html, body {
+    padding: 0;
+    margin: 0;
+    background-color: lightgray;
+}
+nav {
+    position: absolute;
+    height: 100%;
+    width: 15rem;
+    background-color: darkgray;
+    display: inline-block;
+}
+article {
+    height: inherit;
+    margin-left: 15rem; /* to get on the right of the abslute navbar */
+    width: calc(100% - 20rem);
+    padding: 2rem;
+    display: inline-block;
+}
